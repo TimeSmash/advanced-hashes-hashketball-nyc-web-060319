@@ -1,6 +1,9 @@
 # Write your code here!
 require "pry"
 
+
+#gem = similar to API, code someone else wrote
+#rspec fast-fail returns first test failed
 def game_hash
   {
     home: { # team(home) = key, team_stat(bigass hash) = value 
@@ -8,7 +11,7 @@ def game_hash
       :colors => ["Black", "White"], #team colors array of strings
       :players => {
         "Alan Anderson" => {
-          :number => 0,
+          :number => 0, 
           :shoe => 16,
           :points => 22,
           :rebounds => 12,
@@ -156,19 +159,19 @@ def level_inquiry
 #   end
 #   thing.flatten.compact[0]
 # end
-         
-def num_points_scored(player_name)
-  find_the_player(player_name)[:points]
-end
-  
 
 def players
   game_hash[:home][:players].merge(game_hash[:away][:players])
 end
-
+ 
 def find_the_player(player_name)
   players.fetch(player_name)
+end 
+         
+def num_points_scored(player_name)
+  find_the_player(player_name)[:points]
 end
+
 
 def colors
   game_hash[:home][:colors].merge(game_hash[:home][:colors])
@@ -234,6 +237,20 @@ def big_shoe_rebounds
   end
 end
 
+def all_player_points
+  players.collect do |a,b|
+    b[:points]
+  end
+end
+
+def most_points_scored
+  highest_points = player_points.sort[-1]
+  players.each do |a,b|
+    if b[:points] == highest_points
+      return a
+      end
+  end
+end
 
   
   
